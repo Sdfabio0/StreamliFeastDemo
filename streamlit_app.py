@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 import os
 
-repo_dir = os.path.abspath(os.path.realpath(__file__)).replace("streamlit_app.py", "my_project")
+repo_dir = os.path.abspath(os.path.realpath(__file__)).replace("streamlit_app.py", "feature_repo")
 
 
 #define entity_df
@@ -28,7 +28,7 @@ entity_df = pd.DataFrame.from_dict(
     }
 )
 
-store = FeatureStore(repo_path=r'my_project/feature_repo')
+store = FeatureStore(repo_path=repo_dir)
 
 training_df = store.get_historical_features(entity_df=entity_df, features=["driver_hourly_stats:conv_rate","driver_hourly_stats:acc_rate","driver_hourly_stats:avg_daily_trips","transformed_conv_rate:conv_rate_plus_val1","transformed_conv_rate:conv_rate_plus_val2"]).to_df()
 

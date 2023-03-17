@@ -11,11 +11,12 @@ from feast import (
     PushSource,
     RequestSource,
 )
-
+from pathlib import Path
 from feast.feature_service import FeatureService
 from feast.on_demand_feature_view import on_demand_feature_view
 from feast.types import Int64, Float32, Float64
 
+DATA_DIR = Path(os.getcwd(), "data")
 # Define an entity for the driver. You can think of entity as a primary key used to
 # fetch features.
 driver = Entity(name="driver", join_keys=["driver_id"])
@@ -25,8 +26,8 @@ driver = Entity(name="driver", join_keys=["driver_id"])
 # for more info.
 driver_stats_source = FileSource(
     name="driver_hourly_stats_source",
-    path=r'data/driver_stats.parquet',
-    timestamp_field="datetime",
+    path=str(Path(DATA_DIR, "driver_stats.parquet")),
+    timestamp_field="event_timestamp",
     created_timestamp_column="created",
 )
 
